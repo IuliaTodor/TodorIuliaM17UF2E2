@@ -37,13 +37,13 @@ public class CanonRotation : MonoBehaviour
 
         if(Input.GetMouseButton(0))
         {
-            ProjectileSpeed += MaxSpeed;//cada frame s'ha de fer 4 cops més gran
+            ProjectileSpeed += Time.deltaTime * 4;//cada frame s'ha de fer 4 cops més gran
         }
 
         if(Input.GetMouseButtonUp(0))
         {
             var projectile = Instantiate(Bullet, ShootPoint.transform);//On s'instancia?
-            projectile.GetComponent<Rigidbody2D>().velocity = new Vector2(dist.x, dist.y);//quina velocitat ha de tenir la bala? s'ha de fer alguna cosa al vector direcció?
+            projectile.GetComponent<Rigidbody2D>().velocity = new Vector2(dist.x, dist.y).normalized * ProjectileSpeed;//quina velocitat ha de tenir la bala? s'ha de fer alguna cosa al vector direcció?
             ProjectileSpeed = 0f;
         }
         CalculateBarScale();
